@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>About me</title>
+</head>
+
+<body>
+
+    <h1>My Resume</h1>
+    <fieldset>
+
+        <!-- Personal Information -->
+        <legend>Personal Information:</legend>
+
+        <p><strong>Name:</strong> Parikshit Jadhav</p>
+        <p><strong>Email:</strong> parikshit@example.com</p>
+        <p><strong>Phone:</strong> 9021961382</p>
+        <p><strong>Address:</strong> Pune, Maharashtra</p>
+
+        <!-- Education Details using Table -->
+        <h2>Education Details:</h2>
+
+        <table border="2">
+            <tr>
+                <th>Qualification</th>
+                <th>Institute</th>
+                <th>Year</th>
+                <th>Percentage/CGPA</th>
+            </tr>
+            <tr>
+                <td>B.Tech Engineering</td>
+                <td>KBP Engineering College</td>
+                <td>2024</td>
+                <td>7.43 CGPA</td>
+            </tr>
+            <tr>
+                <td>12th</td>
+                <td>ABC Junior College</td>
+                <td>2020</td>
+                <td>60%</td>
+            </tr>
+            <tr>
+                <td>10th</td>
+                <td>Gurukul High School</td>
+                <td>2018</td>
+                <td>82%</td>
+            </tr>
+        </table>
+
+        <!-- Hobbies using Unordered List -->
+        <h2>Hobbies:</h2>
+
+        <ul>
+            <li>Coding</li>
+            <li>Playing Cricket</li>
+            <li>Swimming</li>
+        </ul>
+
+        <!-- Project Description using Description List -->
+        <h2>Project Description:</h2>
+
+        <dl>
+            <dt><strong>Depression Detection System:</strong></dt>
+            <dd>
+                A machine learning based project that analyzes social media posts
+                to detect early signs of depression using NLP techniques.
+            </dd>
+
+            <dt><strong>Online Auction System:</strong></dt>
+            <dd>
+                A web-based application developed using Java, Spring Boot,
+                Hibernate and MySQL for managing online bidding.
+            </dd>
+        </dl>
+
+        <h2>Upload Resume</h2>
+
+        <label for="resume">Choose Resume:</label> 
+        <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+
+        <br></br>
+
+        <button> Upload </button> 
+
+    </fieldset>
+
+</body>
+
+</html>
