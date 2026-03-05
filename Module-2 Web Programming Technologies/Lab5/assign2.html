@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add and Display Array</title>
+</head>
+<body>
+
+    <h1>Add and display</h1>
+    
+    <!-- Text Field -->
+    <input type="text" id="myInput" placeholder="Enter something">
+
+    <!-- Buttons -->
+    <button onclick="addItem()">Add</button>
+    <button onclick="displayItems()">Display</button>
+
+    <!-- UL for displaying items -->
+    <ul id="myList"></ul>
+
+    <script>
+        // Array to store values
+        let items = [];
+
+        // Function to add item to array
+        function addItem() {
+            let input = document.getElementById("myInput").value;
+            
+            if (input.trim() !== "") {
+                items.push(input);  // Add to array
+                document.getElementById("myInput").value = ""; // Clear input
+            } else {
+                alert("Please enter something!");
+            }
+        }
+
+        // Function to display array items
+        function displayItems() {
+            let list = document.getElementById("myList");
+            list.innerHTML = ""; // Clear previous list
+
+            items.forEach(function(item) {
+                let li = document.createElement("li");
+                li.textContent = item;
+                list.appendChild(li);
+            });
+        }
+    </script>
+
+</body>
+</html>
