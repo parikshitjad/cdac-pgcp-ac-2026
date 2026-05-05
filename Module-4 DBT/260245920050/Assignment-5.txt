@@ -1,0 +1,410 @@
+Q.1)Display Name of the salesperson, customer name and amount of sales.
+-->
+Query: select repid as salesperson_id,
+	custname as customer_name,
+	amount as sales_amount
+       from sales;
+
+Output:
+
++----------------+----------------+--------------+
+| salesperson_id | customer_name  | sales_amount |
++----------------+----------------+--------------+
+|           7844 | JOCKSPORTS     |      1703.40 |
+|           7844 | JOCKSPORTS     |       485.00 |
+|           7844 | JOCKSPORTS     |       292.50 |
+|           7844 | JOCKSPORTS     |        50.00 |
+|           7844 | JOCKSPORTS     |       350.00 |
+|           7844 | JOCKSPORTS     |      2400.00 |
+|           7521 | TKB SPORT SHOP |        35.00 |
+|           7521 | TKB SPORT SHOP |         8.40 |
+|           7521 | TKB SPORT SHOP |        58.00 |
+|           7654 | VOLLYRITE      |      3306.00 |
+|           7654 | VOLLYRITE      |     16569.00 |
+|           7654 | VOLLYRITE      |      2300.50 |
+|           7654 | VOLLYRITE      |      5600.00 |
+|           7521 | JUST TENNIS    |       450.00 |
+|           7521 | JUST TENNIS    |       140.00 |
+|           7521 | JUST TENNIS    |       116.00 |
+|           7521 | JUST TENNIS    |        34.00 |
+|           7521 | JUST TENNIS    |        24.00 |
+|           7499 | EVERY MOUNTAIN |       846.80 |
+|           7499 | EVERY MOUNTAIN |        24.00 |
+|           7499 | EVERY MOUNTAIN |      3000.00 |
+|           7499 | EVERY MOUNTAIN |       810.00 |
+|           7499 | EVERY MOUNTAIN |      1500.00 |
+|           7499 | EVERY MOUNTAIN |       400.00 |
+|           7499 | EVERY MOUNTAIN |       240.00 |
+|           7499 | EVERY MOUNTAIN |       340.00 |
+|           7844 | K + T SPORTS   |      1750.00 |
+|           7844 | K + T SPORTS   |      4500.00 |
+|           7844 | K + T SPORTS   |      1400.00 |
+|           7844 | K + T SPORTS   |      2800.00 |
+|           7844 | K + T SPORTS   |     29000.00 |
+|           7844 | K + T SPORTS   |      2400.00 |
+|           7844 | K + T SPORTS   |      2500.00 |
+|           7844 | K + T SPORTS   |       340.00 |
+|           7844 | K + T SPORTS   |       480.00 |
+|           7844 | K + T SPORTS   |      1200.00 |
+|           7521 | SHAPE UP       |         2.40 |
+|           7521 | SHAPE UP       |       174.00 |
+|           7521 | SHAPE UP       |        84.00 |
+|           7521 | SHAPE UP       |       440.00 |
+|           7499 | WOMENS SPORTS  |       180.00 |
+|           7499 | WOMENS SPORTS  |       280.00 |
+|           7499 | WOMENS SPORTS  |       250.00 |
+|           7844 | NORTH WOODS    |       560.00 |
+|           7844 | NORTH WOODS    |      4800.00 |
+|           7844 | NORTH WOODS    |       600.00 |
+|           7844 | NORTH WOODS    |       440.00 |
++----------------+----------------+--------------+
+
+Q.2)List employee name and name of managers.
+-->
+Query: select e.ename as employee_name,
+    	m.ename as manager_name
+    	from emp e
+   	left join emp m
+    	on e.mgr = m.empno;
+
+Output:
+
++---------------+--------------+
+| employee_name | manager_name |
++---------------+--------------+
+| GITA          | GRASS        |
+| VRUSHALI      | GRASS        |
+| SHARMIN       | GRASS        |
+| BANDISH       | GRASS        |
+| SMITH         | FORD         |
+| AARAV         | FORD         |
+| THOMAS        | GRASS        |
+| ALLEN         | BLAKE        |
+| WARD          | BLAKE        |
+| JONES         | KING         |
+| MARTIN        | BLAKE        |
+| BLAKE         | KING         |
+| CLARK         | KING         |
+| SCOTT         | JONES        |
+| KING          | NULL         |
+| FRED          | KING         |
+| TURNER        | BLAKE        |
+| ADAMS         | SCOTT        |
+| Ruhan         | Ruhan        |
+| Neel          | KING         |
+| JAMES         | BLAKE        |
+| FORD          | JONES        |
+| HOFFMAN       | JONES        |
+| GRASS         | HOFFMAN      |
+| MILLER        | CLARK        |
+| AARUSH        | FORD         |
+| ALEX          | BLAKE        |
+| NATASHA       | GRASS        |
+| SANGITA       | GRASS        |
+| SUPRIYA       | GRASS        |
++---------------+--------------+
+
+Q.3)Display details of all departments and the corresponding employees.
+-->
+Query: select
+	d.deptno, d.dname, d.loc,
+	e.empno, e.ename, e.job, e.sal
+       from dept d
+       left join emp e
+       on d.deptno = e.empno
+       order by d.deptno;
+
+Output:
+
++--------+------------+----------+-------+-------+------+------+
+| deptno | dname      | loc      | empno | ename | job  | sal  |
++--------+------------+----------+-------+-------+------+------+
+|     10 | ACCOUNTING | NEW YORK |  NULL | NULL  | NULL | NULL |
+|     20 | RESEARCH   | DALLAS   |  NULL | NULL  | NULL | NULL |
+|     30 | SALES      | CHICAGO  |  NULL | NULL  | NULL | NULL |
+|     40 | OPERATIONS | BOSTON   |  NULL | NULL  | NULL | NULL |
+|     50 | HR         | PUNE     |  NULL | NULL  | NULL | NULL |
+|     60 | IT         | BARODA   |  NULL | NULL  | NULL | NULL |
++--------+------------+----------+-------+-------+------+------+
+
+Q.4)Display all customer names with their order details (order number and ship date) for the orders shipped in 1987.
+-->
+Query: select custname, onum, odate as ship_date from sales
+	where year(odate) = 1987;
+
+Output:
+
+Output is not possible as onum and odate fields are not present in sales table.
+
+Q.5)Display salesman names and names of customers they are dealing with.
+-->
+Query: select repid as salesman_id, custname as customer_name from sales;
+
+Output:
+
++-------------+----------------+
+| salesman_id | customer_name  |
++-------------+----------------+
+|        7844 | JOCKSPORTS     |
+|        7844 | JOCKSPORTS     |
+|        7844 | JOCKSPORTS     |
+|        7844 | JOCKSPORTS     |
+|        7844 | JOCKSPORTS     |
+|        7844 | JOCKSPORTS     |
+|        7521 | TKB SPORT SHOP |
+|        7521 | TKB SPORT SHOP |
+|        7521 | TKB SPORT SHOP |
+|        7654 | VOLLYRITE      |
+|        7654 | VOLLYRITE      |
+|        7654 | VOLLYRITE      |
+|        7654 | VOLLYRITE      |
+|        7521 | JUST TENNIS    |
+|        7521 | JUST TENNIS    |
+|        7521 | JUST TENNIS    |
+|        7521 | JUST TENNIS    |
+|        7521 | JUST TENNIS    |
+|        7499 | EVERY MOUNTAIN |
+|        7499 | EVERY MOUNTAIN |
+|        7499 | EVERY MOUNTAIN |
+|        7499 | EVERY MOUNTAIN |
+|        7499 | EVERY MOUNTAIN |
+|        7499 | EVERY MOUNTAIN |
+|        7499 | EVERY MOUNTAIN |
+|        7499 | EVERY MOUNTAIN |
+|        7844 | K + T SPORTS   |
+|        7844 | K + T SPORTS   |
+|        7844 | K + T SPORTS   |
+|        7844 | K + T SPORTS   |
+|        7844 | K + T SPORTS   |
+|        7844 | K + T SPORTS   |
+|        7844 | K + T SPORTS   |
+|        7844 | K + T SPORTS   |
+|        7844 | K + T SPORTS   |
+|        7844 | K + T SPORTS   |
+|        7521 | SHAPE UP       |
+|        7521 | SHAPE UP       |
+|        7521 | SHAPE UP       |
+|        7521 | SHAPE UP       |
+|        7499 | WOMENS SPORTS  |
+|        7499 | WOMENS SPORTS  |
+|        7499 | WOMENS SPORTS  |
+|        7844 | NORTH WOODS    |
+|        7844 | NORTH WOODS    |
+|        7844 | NORTH WOODS    |
+|        7844 | NORTH WOODS    |
++-------------+----------------+
+
+Q.6)Display salesman who did not earn commission, with customer names whom they are dealing with.
+-->
+Query: SELECT 
+    e.ename AS salesman_name,
+    s.CUSTNAME AS customer_name
+FROM emp e
+JOIN sales s ON e.empno = s.REPID
+WHERE e.comm IS NULL OR e.comm = 0;
+
+Output:
+
++---------------+---------------+
+| salesman_name | customer_name |
++---------------+---------------+
+| TURNER        | JOCKSPORTS    |
+| TURNER        | JOCKSPORTS    |
+| TURNER        | JOCKSPORTS    |
+| TURNER        | JOCKSPORTS    |
+| TURNER        | JOCKSPORTS    |
+| TURNER        | JOCKSPORTS    |
+| TURNER        | K + T SPORTS  |
+| TURNER        | K + T SPORTS  |
+| TURNER        | K + T SPORTS  |
+| TURNER        | K + T SPORTS  |
+| TURNER        | K + T SPORTS  |
+| TURNER        | K + T SPORTS  |
+| TURNER        | K + T SPORTS  |
+| TURNER        | K + T SPORTS  |
+| TURNER        | K + T SPORTS  |
+| TURNER        | K + T SPORTS  |
+| TURNER        | NORTH WOODS   |
+| TURNER        | NORTH WOODS   |
+| TURNER        | NORTH WOODS   |
+| TURNER        | NORTH WOODS   |
++---------------+---------------+
+
+Q.7)Display salesman names, salary, commission and their salary grades.
+-->
+Query: SELECT 
+    e.ename,
+    e.sal,
+    e.comm,
+    s.grade
+FROM emp e
+JOIN salgrade s 
+ON e.sal BETWEEN s.losal AND s.hisal;
+
+Output:
+
++----------+------+------+-------+
+| ename    | sal  | comm | grade |
++----------+------+------+-------+
+| GITA     | 1750 | NULL |     3 |
+| VRUSHALI | 1750 | NULL |     3 |
+| SHARMIN  | 1750 | NULL |     3 |
+| BANDISH  | 1750 | NULL |     3 |
+| SMITH    |  800 | NULL |     1 |
+| AARAV    | 3350 | NULL |     5 |
+| THOMAS   | 1750 | NULL |     3 |
+| ALLEN    | 1600 |  300 |     3 |
+| WARD     | 1250 |  500 |     2 |
+| JONES    | 2975 | NULL |     4 |
+| MARTIN   | 1250 | 1400 |     2 |
+| BLAKE    | 2850 | NULL |     4 |
+| CLARK    | 2450 | NULL |     4 |
+| SCOTT    | 3000 | NULL |     4 |
+| KING     | 5000 | NULL |     6 |
+| FRED     | 5000 | NULL |     6 |
+| TURNER   | 1500 |    0 |     3 |
+| ADAMS    | 1100 | NULL |     1 |
+| Ruhan    | 2000 | NULL |     3 |
+| Neel     | 1000 | NULL |     1 |
+| JAMES    |  950 | NULL |     1 |
+| FORD     | 3000 | NULL |     4 |
+| HOFFMAN  | 4150 | NULL |     6 |
+| GRASS    | 2575 | 2700 |     4 |
+| MILLER   | 1300 | 1300 |     2 |
+| AARUSH   | 1350 | 2700 |     2 |
+| ALEX     | 1250 |  500 |     2 |
+| NATASHA  | 1750 | NULL |     3 |
+| SANGITA  | 1750 | NULL |     3 |
+| SUPRIYA  | 1750 | NULL |     3 |
++----------+------+------+-------+
+
+Q.8)Display all Tennis products and their price details (standard and minimum price).
+-->
+Query: SELECT 
+    PRODNAME,
+    AMOUNT AS standard_price,
+    AMOUNT * 0.9 AS minimum_price
+FROM sales
+WHERE PRODNAME LIKE '%TENNIS%';
+
+Output:
+
++-------------------------+----------------+---------------+
+| PRODNAME                | standard_price | minimum_price |
++-------------------------+----------------+---------------+
+| ACE TENNIS BALLS-3 PACK |        3306.00 |       2975.40 |
+| ACE TENNIS RACKET I     |       16569.00 |      14912.10 |
+| ACE TENNIS NET          |         174.00 |        156.60 |
+| ACE TENNIS RACKET II    |          84.00 |         75.60 |
+| ACE TENNIS RACKET I     |         440.00 |        396.00 |
+| RH: "GUIDE TO TENNIS"   |        1703.40 |       1533.06 |
+| ACE TENNIS BALLS-6 PACK |         846.80 |        762.12 |
+| SP TENNIS RACKET        |          24.00 |         21.60 |
+| ACE TENNIS RACKET II    |         485.00 |        436.50 |
+| ACE TENNIS BALLS-3 PACK |         292.50 |        263.25 |
+| ACE TENNIS NET          |          50.00 |         45.00 |
+| ACE TENNIS RACKET I     |          35.00 |         31.50 |
+| ACE TENNIS BALLS-3 PACK |           8.40 |          7.56 |
+| ACE TENNIS NET          |          58.00 |         52.20 |
+| ACE TENNIS RACKET II    |        2300.50 |       2070.45 |
+| ACE TENNIS RACKET I     |        3000.00 |       2700.00 |
+| ACE TENNIS RACKET II    |         810.00 |        729.00 |
+| ACE TENNIS BALLS-6 PACK |         560.00 |        504.00 |
+| SP TENNIS RACKET        |        4800.00 |       4320.00 |
+| ACE TENNIS BALLS-6 PACK |        5600.00 |       5040.00 |
+| ACE TENNIS RACKET II    |         180.00 |        162.00 |
+| ACE TENNIS BALLS-3 PACK |         280.00 |        252.00 |
+| ACE TENNIS BALLS-6 PACK |         250.00 |        225.00 |
+| ACE TENNIS RACKET II    |         450.00 |        405.00 |
+| ACE TENNIS BALLS-3 PACK |         140.00 |        126.00 |
+| ACE TENNIS NET          |         116.00 |        104.40 |
+| RH: "GUIDE TO TENNIS"   |          34.00 |         30.60 |
+| ACE TENNIS RACKET I     |        1750.00 |       1575.00 |
+| ACE TENNIS RACKET II    |        4500.00 |       4050.00 |
+| ACE TENNIS BALLS-3 PACK |        1400.00 |       1260.00 |
+| ACE TENNIS BALLS-6 PACK |        2800.00 |       2520.00 |
+| ACE TENNIS NET          |       29000.00 |      26100.00 |
+| SP TENNIS RACKET        |        2400.00 |       2160.00 |
+| RH: "GUIDE TO TENNIS"   |         340.00 |        306.00 |
+| RH: "GUIDE TO TENNIS"   |         340.00 |        306.00 |
+| ACE TENNIS RACKET I     |         350.00 |        315.00 |
++-------------------------+----------------+---------------+
+
+Q.9)Display the products purchased by either JOCKSPORTS (customer number 100) or JUST TENNIS (customer number 103) or both of them.
+-->
+Query: select distinct prodname from sales where custid = 100 or custid = 	103;
+
+Output:
+
++-------------------------+
+| prodname                |
++-------------------------+
+| RH: "GUIDE TO TENNIS"   |
+| ACE TENNIS RACKET II    |
+| ACE TENNIS BALLS-3 PACK |
+| ACE TENNIS NET          |
+| ACE TENNIS RACKET I     |
+| SB ENERGY BAR-6 PACK    |
++-------------------------+
+
+Q.10)Display the department name, and salary of any employee whose salary and commission matches both the salary and commission of any employee in DALLAS.
+-->
+Query: SELECT 
+    d.dname,
+    e.sal
+FROM emp e
+JOIN dept d ON e.deptno = d.deptno
+WHERE (e.sal, IFNULL(e.comm,0)) IN (
+    SELECT sal, IFNULL(comm,0)
+    FROM emp
+    WHERE deptno IN (
+        SELECT deptno
+        FROM dept
+        WHERE loc = 'DALLAS'
+    )
+);
+
+Output:
+
++------------+------+
+| dname      | sal  |
++------------+------+
+| SALES      | 1750 |
+| HR         | 1750 |
+| RESEARCH   | 1750 |
+| RESEARCH   | 1750 |
+| RESEARCH   |  800 |
+| ACCOUNTING | 1750 |
+| RESEARCH   | 2975 |
+| RESEARCH   | 3000 |
+| ACCOUNTING | 5000 |
+| RESEARCH   | 5000 |
+| RESEARCH   | 1100 |
+| RESEARCH   | 3000 |
+| SALES      | 1750 |
+| HR         | 1750 |
+| HR         | 1750 |
++------------+------+
+
+Q.11)List out the common jobs in Research and Accounting Departments in ascending order.
+-->
+Query: SELECT job
+	FROM emp
+	WHERE deptno IN (
+    SELECT deptno 
+    FROM dept 
+    WHERE dname IN ('RESEARCH', 'ACCOUNTING')
+	)
+	GROUP BY job
+	HAVING COUNT(DISTINCT deptno) = 2
+	ORDER BY job;
+
+Output:
+
++---------+
+| job     |
++---------+
+| CLERK   |
+| MANAGER |
++---------+
+

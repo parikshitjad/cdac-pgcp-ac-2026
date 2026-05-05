@@ -1,0 +1,603 @@
+Q.1)Display the Employee Name, Job, and Start Date of Employees hired from February 1981 to May 1981.
+-->
+Query: select ename, job, hiredate from emp where hiredate between '1981-02-01' and '1981-05-31';
+
+Output:
+
++-------+----------+------------+
+| ename | job      | hiredate   |
++-------+----------+------------+
+| ALLEN | SALESMAN | 1981-02-20 |
+| WARD  | SALESMAN | 1981-02-22 |
+| JONES | MANAGER  | 1981-04-02 |
+| BLAKE | MANAGER  | 1981-05-01 |
++-------+----------+------------+
+
+Q.2)Display the Name and Hiredate of every Employee who was hired in 1982.
+-->
+Query: select ename, hiredate from emp where hiredate = 1981;
+
+Output:
+
++---------+------------+
+| ename   | hiredate   |
++---------+------------+
+| SCOTT   | 1982-12-09 |
+| HOFFMAN | 1982-03-24 |
+| MILLER  | 1982-01-23 |
+| ALEX    | 1982-01-24 |
++---------+------------+
+
+Q.3)Write a query to display the current date. Label the column as Current Date.
+-->
+Query: select current_date() as "Current Date";
+
+Output:
+
++--------------+
+| Current Date |
++--------------+
+| 2026-04-20   |
++--------------+
+
+Q.4)Display the Employee’s Name, Hiredate, Salary and Review Date, which is first Monday after six months of service.
+-->
+
+Query: SELECT ENAME, HIREDATE, SAL, DATE_ADD(DATE_ADD(HIREDATE, INTERVAL 6 MONTH),
+        INTERVAL (9 - DAYOFWEEK(DATE_ADD(HIREDATE, INTERVAL 6 MONTH))) % 7 DAY) AS REVIEW_DATE FROM EMP;
+
+Output:
+
++----------+------------+------+-------------+
+| ENAME    | HIREDATE   | SAL  | REVIEW_DATE |
++----------+------------+------+-------------+
+| GITA     | 1981-07-19 | 1750 | 1982-01-25  |
+| VRUSHALI | 1981-07-19 | 1750 | 1982-01-25  |
+| SHARMIN  | 1981-07-19 | 1750 | 1982-01-25  |
+| BANDISH  | 1981-07-19 | 1750 | 1982-01-25  |
+| SMITH    | 1980-12-17 |  800 | 1981-06-22  |
+| AARAV    | 1981-12-31 | 3350 | 1982-07-05  |
+| THOMAS   | 1981-07-19 | 1750 | 1982-01-25  |
+| ALLEN    | 1981-02-20 | 1600 | 1981-08-24  |
+| WARD     | 1981-02-22 | 1250 | 1981-08-24  |
+| JONES    | 1981-04-02 | 2975 | 1981-10-05  |
+| MARTIN   | 1981-09-28 | 1250 | 1982-03-29  |
+| BLAKE    | 1981-05-01 | 2850 | 1981-11-02  |
+| CLARK    | 1981-06-09 | 2450 | 1981-12-14  |
+| SCOTT    | 1982-12-09 | 3000 | 1983-06-13  |
+| KING     | 1981-11-17 | 5000 | 1982-05-17  |
+| FRED     | 1983-08-09 | 5000 | 1984-02-13  |
+| TURNER   | 1981-09-08 | 1500 | 1982-03-08  |
+| ADAMS    | 1983-01-12 | 1100 | 1983-07-18  |
+| Ruhan    | 1983-08-09 | 2000 | 1984-02-13  |
+| Neel     | 1983-08-09 | 1000 | 1984-02-13  |
+| JAMES    | 1981-12-03 |  950 | 1982-06-07  |
+| FORD     | 1981-12-03 | 3000 | 1982-06-07  |
+| HOFFMAN  | 1982-03-24 | 4150 | 1982-09-27  |
+| GRASS    | 1980-02-14 | 2575 | 1980-08-18  |
+| MILLER   | 1982-01-23 | 1300 | 1982-07-26  |
+| AARUSH   | 1980-02-14 | 1350 | 1980-08-18  |
+| ALEX     | 1982-01-24 | 1250 | 1982-07-26  |
+| NATASHA  | 1981-07-19 | 1750 | 1982-01-25  |
+| SANGITA  | 1981-07-19 | 1750 | 1982-01-25  |
+| SUPRIYA  | 1981-07-19 | 1750 | 1982-01-25  |
++----------+------------+------+-------------+
+
+Q.5)Modify the query to display the dates as “Sunday, the Seventh of September, 1981”.
+-->
+Query: SELECT ENAME,  DATE_FORMAT(HIREDATE, '%W, the %D of %M, %Y') AS HIREDATE, 
+	HIREDATE, SAL, DATE_FORMAT(DATE_ADD(DATE_ADD(HIREDATE, INTERVAL 6 MONTH),
+        INTERVAL (7 - DAYOFWEEK(DATE_ADD(HIREDATE, INTERVAL 6 MONTH))) % 7 DAY), '%W, the %D of %M, %Y') AS REVIEW_DATE FROM EMP;
+
+Output:
+
++----------+---------------------------------------+------------+------+---------------------------------------+
+| ENAME    | HIREDATE                              | HIREDATE   | SAL  | REVIEW_DATE                           |
++----------+---------------------------------------+------------+------+---------------------------------------+
+| GITA     | Sunday, the 19th of July, 1981        | 1981-07-19 | 1750 | Saturday, the 23rd of January, 1982   |
+| VRUSHALI | Sunday, the 19th of July, 1981        | 1981-07-19 | 1750 | Saturday, the 23rd of January, 1982   |
+| SHARMIN  | Sunday, the 19th of July, 1981        | 1981-07-19 | 1750 | Saturday, the 23rd of January, 1982   |
+| BANDISH  | Sunday, the 19th of July, 1981        | 1981-07-19 | 1750 | Saturday, the 23rd of January, 1982   |
+| SMITH    | Wednesday, the 17th of December, 1980 | 1980-12-17 |  800 | Saturday, the 20th of June, 1981      |
+| AARAV    | Thursday, the 31st of December, 1981  | 1981-12-31 | 3350 | Saturday, the 3rd of July, 1982       |
+| THOMAS   | Sunday, the 19th of July, 1981        | 1981-07-19 | 1750 | Saturday, the 23rd of January, 1982   |
+| ALLEN    | Friday, the 20th of February, 1981    | 1981-02-20 | 1600 | Saturday, the 22nd of August, 1981    |
+| WARD     | Sunday, the 22nd of February, 1981    | 1981-02-22 | 1250 | Saturday, the 22nd of August, 1981    |
+| JONES    | Thursday, the 2nd of April, 1981      | 1981-04-02 | 2975 | Saturday, the 3rd of October, 1981    |
+| MARTIN   | Monday, the 28th of September, 1981   | 1981-09-28 | 1250 | Saturday, the 3rd of April, 1982      |
+| BLAKE    | Friday, the 1st of May, 1981          | 1981-05-01 | 2850 | Saturday, the 7th of November, 1981   |
+| CLARK    | Tuesday, the 9th of June, 1981        | 1981-06-09 | 2450 | Saturday, the 12th of December, 1981  |
+| SCOTT    | Thursday, the 9th of December, 1982   | 1982-12-09 | 3000 | Saturday, the 11th of June, 1983      |
+| KING     | Tuesday, the 17th of November, 1981   | 1981-11-17 | 5000 | Saturday, the 22nd of May, 1982       |
+| FRED     | Tuesday, the 9th of August, 1983      | 1983-08-09 | 5000 | Saturday, the 11th of February, 1984  |
+| TURNER   | Tuesday, the 8th of September, 1981   | 1981-09-08 | 1500 | Saturday, the 13th of March, 1982     |
+| ADAMS    | Wednesday, the 12th of January, 1983  | 1983-01-12 | 1100 | Saturday, the 16th of July, 1983      |
+| Ruhan    | Tuesday, the 9th of August, 1983      | 1983-08-09 | 2000 | Saturday, the 11th of February, 1984  |
+| Neel     | Tuesday, the 9th of August, 1983      | 1983-08-09 | 1000 | Saturday, the 11th of February, 1984  |
+| JAMES    | Thursday, the 3rd of December, 1981   | 1981-12-03 |  950 | Saturday, the 5th of June, 1982       |
+| FORD     | Thursday, the 3rd of December, 1981   | 1981-12-03 | 3000 | Saturday, the 5th of June, 1982       |
+| HOFFMAN  | Wednesday, the 24th of March, 1982    | 1982-03-24 | 4150 | Saturday, the 25th of September, 1982 |
+| GRASS    | Thursday, the 14th of February, 1980  | 1980-02-14 | 2575 | Saturday, the 16th of August, 1980    |
+| MILLER   | Saturday, the 23rd of January, 1982   | 1982-01-23 | 1300 | Saturday, the 24th of July, 1982      |
+| AARUSH   | Thursday, the 14th of February, 1980  | 1980-02-14 | 1350 | Saturday, the 16th of August, 1980    |
+| ALEX     | Sunday, the 24th of January, 1982     | 1982-01-24 | 1250 | Saturday, the 24th of July, 1982      |
+| NATASHA  | Sunday, the 19th of July, 1981        | 1981-07-19 | 1750 | Saturday, the 23rd of January, 1982   |
+| SANGITA  | Sunday, the 19th of July, 1981        | 1981-07-19 | 1750 | Saturday, the 23rd of January, 1982   |
+| SUPRIYA  | Sunday, the 19th of July, 1981        | 1981-07-19 | 1750 | Saturday, the 23rd of January, 1982   |
++----------+---------------------------------------+------------+------+---------------------------------------+
+
+Q.6)Create a query to display the name and salary for all Employees. Format the salary to be 15 characters
+long by adding ‘$’.
+-->
+
+Query: select ename, lpad(concat('$', sal), 15, ' ') as "Salary" from emp;
+
+Output:
+
++----------+-----------------+
+| ename    | Salary          |
++----------+-----------------+
+| GITA     |           $1750 |
+| VRUSHALI |           $1750 |
+| SHARMIN  |           $1750 |
+| BANDISH  |           $1750 |
+| SMITH    |            $800 |
+| AARAV    |           $3350 |
+| THOMAS   |           $1750 |
+| ALLEN    |           $1600 |
+| WARD     |           $1250 |
+| JONES    |           $2975 |
+| MARTIN   |           $1250 |
+| BLAKE    |           $2850 |
+| CLARK    |           $2450 |
+| SCOTT    |           $3000 |
+| KING     |           $5000 |
+| FRED     |           $5000 |
+| TURNER   |           $1500 |
+| ADAMS    |           $1100 |
+| Ruhan    |           $2000 |
+| Neel     |           $1000 |
+| JAMES    |            $950 |
+| FORD     |           $3000 |
+| HOFFMAN  |           $4150 |
+| GRASS    |           $2575 |
+| MILLER   |           $1300 |
+| AARUSH   |           $1350 |
+| ALEX     |           $1250 |
+| NATASHA  |           $1750 |
+| SANGITA  |           $1750 |
+| SUPRIYA  |           $1750 |
++----------+-----------------+
+
+Q.7)Display the Name, Hiredate and day of the week on which the employees started. Order the results by the
+    Day of the week starting with Monday.
+-->
+
+Query: select name, hiredate, dayname(hiredate) as "Day_of_week" 
+	from emp order by weekday(hiredate);
+
+Output:
+
++----------+------------+-------------+
+| ENAME    | HIREDATE   | DAY_OF_WEEK |
++----------+------------+-------------+
+| MARTIN   | 1981-09-28 | Monday      |
+| CLARK    | 1981-06-09 | Tuesday     |
+| KING     | 1981-11-17 | Tuesday     |
+| FRED     | 1983-08-09 | Tuesday     |
+| TURNER   | 1981-09-08 | Tuesday     |
+| Ruhan    | 1983-08-09 | Tuesday     |
+| Neel     | 1983-08-09 | Tuesday     |
+| SMITH    | 1980-12-17 | Wednesday   |
+| ADAMS    | 1983-01-12 | Wednesday   |
+| HOFFMAN  | 1982-03-24 | Wednesday   |
+| AARAV    | 1981-12-31 | Thursday    |
+| JONES    | 1981-04-02 | Thursday    |
+| SCOTT    | 1982-12-09 | Thursday    |
+| JAMES    | 1981-12-03 | Thursday    |
+| FORD     | 1981-12-03 | Thursday    |
+| GRASS    | 1980-02-14 | Thursday    |
+| AARUSH   | 1980-02-14 | Thursday    |
+| ALLEN    | 1981-02-20 | Friday      |
+| BLAKE    | 1981-05-01 | Friday      |
+| MILLER   | 1982-01-23 | Saturday    |
+| GITA     | 1981-07-19 | Sunday      |
+| VRUSHALI | 1981-07-19 | Sunday      |
+| SHARMIN  | 1981-07-19 | Sunday      |
+| BANDISH  | 1981-07-19 | Sunday      |
+| THOMAS   | 1981-07-19 | Sunday      |
+| WARD     | 1981-02-22 | Sunday      |
+| ALEX     | 1982-01-24 | Sunday      |
+| NATASHA  | 1981-07-19 | Sunday      |
+| SANGITA  | 1981-07-19 | Sunday      |
+| SUPRIYA  | 1981-07-19 | Sunday      |
++----------+------------+-------------+
+
+Q.8)Display details of orders received in the year 1986. 
+-->
+Query: select * from ord where year(orderdate) = 1986;
+
+Output:
+
++-------+------------+----------+--------+------------+----------------+------------+------------+---------+
+| ORDID | ORDERDATE  | COMMPLAN | CUSTID | SHIPDATE   | actualShipDate | STATUSDATE | STATUS     | TOTAL   |
++-------+------------+----------+--------+------------+----------------+------------+------------+---------+
+|   601 | 1986-05-01 | A        |    106 | 1986-05-30 | 1986-06-02     | NULL       | In Process |    2.40 |
+|   602 | 1986-06-05 | B        |    102 | 1986-06-20 | NULL           | 1986-07-09 | On Hold    |   56.00 |
+|   603 | 1986-06-05 | NULL     |    102 | 1986-06-05 | 1986-06-07     | 1986-06-10 | Cancelled  |  224.00 |
+|   604 | 1986-06-15 | A        |    106 | 1986-05-30 | NULL           | 1986-07-04 | Resolved   |  698.00 |
+|   606 | 1986-07-14 | A        |    100 | 1986-07-30 | 1986-07-30     | NULL       | Shipped    |    3.40 |
+|   607 | 1986-07-18 | C        |    104 | 1986-07-18 | 1986-07-20     | NULL       | In Process |    5.60 |
+|   608 | 1986-07-25 | C        |    104 | 1986-07-25 | 1986-07-25     | NULL       | Shipped    |   35.20 |
+|   609 | 1986-08-01 | B        |    100 | 1986-08-15 | NULL           | 1986-08-19 | On Hold    |   97.50 |
+|   622 | 1986-12-31 | a        |    105 | 1987-01-01 | NULL           | 1987-01-06 | Delivered  | 1125.00 |
++-------+------------+----------+--------+------------+----------------+------------+------------+---------+
+
+Q.9)Write a query to find out the DAY (for example, SUNDAY) of the current date.
+-->
+Query: select dayname(curdate());
+
+Output: 
+
++--------------------+
+| dayname(curdate()) |
++--------------------+
+| Monday             |
++--------------------+
+
+Q.10)Display the name and the date of joining of the employees who belong to department number 10. The
+date of joining should be formatted. For eg. if it is ‘10-JUN-97’ it should be displayed as Fifteenth JUNE,
+1997. The name of the employee should be in upper case.
+-->
+Query: SELECT 
+    	Ucase(ename) AS employee_name,
+    	DATE_FORMAT(hiredate, '%d-%M-%y') AS formatted_joining_date FROM emp WHERE deptno = 10;
+
+Output:
+
++---------------+------------------------+
+| employee_name | formatted_joining_date |
++---------------+------------------------+
+| AARAV         | 31-December-81         |
+| THOMAS        | 19-July-81             |
+| CLARK         | 09-June-81             |
+| KING          | 17-November-81         |
+| MILLER        | 23-January-82          |
++---------------+------------------------+
+
+
+
+Q.11) Consider the Ord table. Find the difference between the Order Date and Ship Date in months as well as
+	days. Label the columns appropriately.
+-->
+Query:  select ordid, orderdate, shipdate, timestampdiff(month, orderdate, shipdate) as monthdifference, 	datediff(shipdate, orderdate) as daysdifference from ord;
+
+Output:
+
++-------+------------+------------+-----------------+----------------+
+| ordid | orderdate  | shipdate   | monthdifference | daysdifference |
++-------+------------+------------+-----------------+----------------+
+|   601 | 1986-05-01 | 1986-05-30 |               0 |             29 |
+|   602 | 1986-06-05 | 1986-06-20 |               0 |             15 |
+|   603 | 1986-06-05 | 1986-06-05 |               0 |              0 |
+|   604 | 1986-06-15 | 1986-05-30 |               0 |            -16 |
+|   606 | 1986-07-14 | 1986-07-30 |               0 |             16 |
+|   607 | 1986-07-18 | 1986-07-18 |               0 |              0 |
+|   608 | 1986-07-25 | 1986-07-25 |               0 |              0 |
+|   609 | 1986-08-01 | 1986-08-15 |               0 |             14 |
+|   610 | 1987-01-07 | 1987-01-08 |               0 |              1 |
+|   611 | 1987-01-11 | 1987-01-11 |               0 |              0 |
+|   612 | 1987-01-15 | 1987-01-20 |               0 |              5 |
+|   613 | 1987-02-01 | 1987-02-01 |               0 |              0 |
+|   614 | 1987-02-01 | 1987-02-05 |               0 |              4 |
+|   615 | 1987-02-01 | 1987-02-06 |               0 |              5 |
+|   616 | 1987-02-03 | 1987-02-10 |               0 |              7 |
+|   617 | 1987-02-05 | 1987-03-03 |               0 |             26 |
+|   618 | 1987-02-15 | 1987-03-06 |               0 |             19 |
+|   619 | 1987-02-22 | 1987-02-04 |               0 |            -18 |
+|   620 | 1987-03-12 | 1987-03-12 |               0 |              0 |
+|   621 | 1987-03-15 | 1987-03-01 |               0 |            -14 |
+|   622 | 1986-12-31 | 1987-01-01 |               0 |              1 |
+|   624 | 1987-01-06 | 1987-01-06 |               0 |              0 |
+|   625 | 1987-01-09 | 1987-01-10 |               0 |              1 |
+|   626 | 1987-01-31 | 1987-02-01 |               0 |              1 |
+|   627 | 1987-02-13 | 1987-02-14 |               0 |              1 |
+|   628 | 1987-03-13 | 1987-03-14 |               0 |              1 |
+|   629 | 1987-03-14 | 1987-03-16 |               0 |              2 |
+|   630 | 1987-02-21 | 1987-02-22 |               0 |              1 |
+|   631 | 1987-02-23 | 1987-02-23 |               0 |              0 |
+|   632 | 1987-03-13 | 1987-03-14 |               0 |              1 |
+|   633 | 1987-03-14 | 1987-03-16 |               0 |              2 |
+|   634 | 1987-02-21 | 1987-02-22 |               0 |              1 |
+|   635 | 1987-02-23 | 1987-02-23 |               0 |              0 |
++-------+------------+------------+-----------------+----------------+
+
+Q.12)List employee details who have joined in December.
+-->
+Query: select * from emp where month(hiredate) = 12;
+
+Output:
+
++-------+-------+--------+---------+------+------------+------+------+--------+---------+--------------+------------+------------+----------+
+| EMPNO | ENAME | GENDER | JOB     | MGR  | HIREDATE   | SAL  | COMM | DEPTNO | BONUSID | USER NAME    | PWD        | PHONE      | isActive |
++-------+-------+--------+---------+------+------------+------+------+--------+---------+--------------+------------+------------+----------+
+|  7369 | SMITH | M      | CLERK   | 7902 | 1980-12-17 |  800 | NULL |     20 |       2 | TRITONE      | a12recmpm  | 7032300023 |        0 |
+|  7415 | AARAV | M      | CLERK   | 7902 | 1981-12-31 | 3350 | NULL |     10 |    NULL | AARAV        | NULL       | 7032300084 |        0 |
+|  7788 | SCOTT | M      | ANALYST | 7566 | 1982-12-09 | 3000 | NULL |     20 |       3 | WHITE SAND   | a12recmpm  | NULL       |        1 |
+|  7900 | JAMES | M      | CLERK   | 7698 | 1981-12-03 |  950 | NULL |     30 |       2 | CRAZY LEADER | sales@2017 | 7132300042 |        1 |
+|  7902 | FORD  | M      | ANALYST | 7566 | 1981-12-03 | 3000 | NULL |     20 |       4 | CONBRIO      | a12recmpm  | NULL       |        0 |
++-------+-------+--------+---------+------+------------+------+------+--------+---------+--------------+------------+------------+----------+
+
+Q.13)Display day on which KING joined.
+-->
+Query: select ename, dayname(hiredate) as "Joining_day" from emp where ename = "KING";
+
+Output:
+
++-------+-------------+
+| ename | Joining_day |
++-------+-------------+
+| KING  | Tuesday     |
++-------+-------------+
+
+Q.14)Display month on which MARTIN joined.
+-->
+Query: select ename, monthname(hiredate) as "Joining_Month" from emp where ename = "MARTIN";
+
+Output:
+
++--------+---------------+
+| ename  | Joining_Month |
++--------+---------------+
+| MARTIN | September     |
++--------+---------------+
+
+Q.15) Find number of days elapsed between today’s date and hiredate of ‘ADAMS’.
+-->
+Query: select ename, datediff(curdate(), hiredate) as "Days_elapsed" from emp where ename = "ADAMS";
+
+Output:
+
++-------+--------------+
+| ename | Days_elapsed |
++-------+--------------+
+| ADAMS |        15804 |
++-------+--------------+
+
+Q.16)Print the date, 15 days alter today's date.
+-->
+Query: select date_add(curdate() interval 15 day) as "Future_Date";
+
+Output:
+
++-------------+
+| Future_Date |
++-------------+
+| 2026-05-05  |
++-------------+
+
+Q.17) List all employee hired in the month of December.
+-->
+Query: select * from emp where month(hiredate) = 12;
+
+Output:
+
++-------+-------+--------+---------+------+------------+------+------+--------+---------+--------------+------------+------------+----------+
+| EMPNO | ENAME | GENDER | JOB     | MGR  | HIREDATE   | SAL  | COMM | DEPTNO | BONUSID | USER NAME    | PWD        | PHONE      | isActive |
++-------+-------+--------+---------+------+------------+------+------+--------+---------+--------------+------------+------------+----------+
+|  7369 | SMITH | M      | CLERK   | 7902 | 1980-12-17 |  800 | NULL |     20 |       2 | TRITONE      | a12recmpm  | 7032300023 |        0 |
+|  7415 | AARAV | M      | CLERK   | 7902 | 1981-12-31 | 3350 | NULL |     10 |    NULL | AARAV        | NULL       | 7032300084 |        0 |
+|  7788 | SCOTT | M      | ANALYST | 7566 | 1982-12-09 | 3000 | NULL |     20 |       3 | WHITE SAND   | a12recmpm  | NULL       |        1 |
+|  7900 | JAMES | M      | CLERK   | 7698 | 1981-12-03 |  950 | NULL |     30 |       2 | CRAZY LEADER | sales@2017 | 7132300042 |        1 |
+|  7902 | FORD  | M      | ANALYST | 7566 | 1981-12-03 | 3000 | NULL |     20 |       4 | CONBRIO      | a12recmpm  | NULL       |        0 |
++-------+-------+--------+---------+------+------------+------+------+--------+---------+--------------+------------+------------+----------+
+
+Q.18) List all employee hired after 1980.
+-->
+Query: select * from emp where year(hiredate) = 1980;
+
+Output:
+
++-------+--------+--------+----------+------+------------+------+------+--------+---------+-----------+------------+------------+----------+
+| EMPNO | ENAME  | GENDER | JOB      | MGR  | HIREDATE   | SAL  | COMM | DEPTNO | BONUSID | USER NAME | PWD        | PHONE      | isActive |
++-------+--------+--------+----------+------+------------+------+------+--------+---------+-----------+------------+------------+----------+
+|  7369 | SMITH  | M      | CLERK    | 7902 | 1980-12-17 |  800 | NULL |     20 |       2 | TRITONE   | a12recmpm  | 7032300023 |        0 |
+|  7920 | GRASS  | M      | SALESMAN | 7919 | 1980-02-14 | 2575 | 2700 |     30 |       5 | GRASS     | sales@2017 | NULL       |        1 |
+|  7945 | AARUSH | M      | SALESMAN | 7902 | 1980-02-14 | 1350 | 2700 |     30 |    NULL | AARUSH    | ABCDEF     | NULL       |        0 |
++-------+--------+--------+----------+------+------------+------+------+--------+---------+-----------+------------+------------+----------+
+
+Q.19)Display names and jobs of employee in the format SMITH-CLERK.
+-->
+Query: select concat(ename ' - ', job) as "Employee Details" from emp;
+
+Output:
+
++--------------------------------+
+| Employee Details               |
++--------------------------------+
+| GITA - Compliance officers     |
+| VRUSHALI - Compliance officers |
+| SHARMIN - Public Relation      |
+| BANDISH - Public Relation      |
+| SMITH - CLERK                  |
+| AARAV - CLERK                  |
+| THOMAS - CLERK                 |
+| ALLEN - SALESMAN               |
+| WARD - SALESMAN                |
+| JONES - MANAGER                |
+| MARTIN - SALESMAN              |
+| BLAKE - MANAGER                |
+| CLARK - MANAGER                |
+| SCOTT - ANALYST                |
+| KING - PRESIDENT               |
+| FRED - vice PRESIDENT          |
+| TURNER - SALESMAN              |
+| ADAMS - CLERK                  |
+| Ruhan - Network                |
+| Neel - vice PRESIDENT          |
+| JAMES - CLERK                  |
+| FORD - ANALYST                 |
+| HOFFMAN - MANAGER              |
+| GRASS - SALESMAN               |
+| MILLER - CLERK                 |
+| AARUSH - SALESMAN              |
+| ALEX - MANAGER                 |
+| NATASHA - CLERK                |
+| SANGITA - Compliance officers  |
+| SUPRIYA - ANALYST              |
++--------------------------------+
+
+Q.20)Show the length of names in EMP table. Eliminate duplicate length. Do not show the names.
+-->
+Query: select distinct length(ename) as "name_length" from emp;
+
+Output:
+
++-------------+
+| name_length |
++-------------+
+|           4 |
+|           8 |
+|           7 |
+|           5 |
+|           6 |
++-------------+
+
+Q.21)List the names and hiredate of EMP in dept 20, display hiredate formatted as 12/03/1984.
+-->
+Query: SELECT ename, DATE_FORMAT(hiredate, '%d/%m/%Y') AS "formatted_hiredate" FROM emp WHERE deptno = 20;
+
+Output:
+
++---------+--------------------+
+| ename   | formatted_hiredate |
++---------+--------------------+
+| SHARMIN | 19/07/1981         |
+| BANDISH | 19/07/1981         |
+| SMITH   | 17/12/1980         |
+| JONES   | 02/04/1981         |
+| SCOTT   | 09/12/1982         |
+| FRED    | 09/08/1983         |
+| ADAMS   | 12/01/1983         |
+| FORD    | 03/12/1981         |
++---------+--------------------+
+
+Q.22)Find the day of week on which SMITH joined.
+-->
+Query: select dayname(hiredate) from emp where ename = "smith";
+
+Output:
+
++-------------------+
+| dayname(hiredate) |
++-------------------+
+| Wednesday         |
++-------------------+
+
+Q.23)Retrieve the ANALYST record with hiredate formatted as ‘The 3rd of Oct. 1984’.
+-->
+Query: SELECT 
+    ename,
+    CONCAT(
+        'The ',
+        DAY(hiredate),
+        CASE 
+            WHEN DAY(hiredate) IN (1,21,31) THEN 'st'
+            WHEN DAY(hiredate) IN (2,22) THEN 'nd'
+            WHEN DAY(hiredate) IN (3,23) THEN 'rd'
+            ELSE 'th'
+        END,
+        ' of ',
+        DATE_FORMAT(hiredate, '%b. %Y')
+    ) AS formatted_hiredate
+FROM emp
+WHERE job = 'ANALYST';
+
+Output:
+
++---------+-----------------------+
+| ename   | formatted_hiredate    |
++---------+-----------------------+
+| SCOTT   | The 9th of Dec. 1982  |
+| FORD    | The 3rd of Dec. 1981  |
+| SUPRIYA | The 19th of Jul. 1981 |
++---------+-----------------------+
+
+Q.24)Calculate the total compensation expensive for each dept in 1 year. Assume that employees, who don't
+earn commission, receive non-monetary benefits than are worth Rs.1000 a month.
+-->
+Query: SELECT 
+    deptno,
+    SUM(
+        (sal * 12) + 
+        IFNULL(comm, 0) + 
+        (CASE 
+            WHEN comm IS NULL THEN 1000 * 12 
+            ELSE 0 
+         END)
+    ) AS "total_annual_compensation"
+FROM emp
+GROUP BY deptno;
+
+Output:
+
++--------+---------------------------+
+| deptno | total_annual_compensation |
++--------+---------------------------+
+|     10 |                    215500 |
+|     20 |                    328500 |
+|     30 |                    334800 |
+|     50 |                     99000 |
+|     60 |                     60000 |
++--------+---------------------------+
+
+Q.25)Display the Names of the Managers as follows-
+	a. If the employee code is 7788 the Manager is CLARK
+	b. If the employee code is 7698 the Manager is BLAKE
+	c. If the employee code is 7566 the Manager is JONES
+	d. For all other Employees the Manager is KING
+-->
+Query: select ename,
+	case
+	 when empno=7788 then 'clark'
+	 when empno=7698 then 'blake'
+	 when empno=7566 then 'jones'
+	 else 'king'
+	end as "manager_name" from emp;
+
+Output:
+
++----------+--------------+
+| ename    | manager_name |
++----------+--------------+
+| GITA     | king         |
+| VRUSHALI | king         |
+| SHARMIN  | king         |
+| BANDISH  | king         |
+| SMITH    | king         |
+| AARAV    | king         |
+| THOMAS   | king         |
+| ALLEN    | king         |
+| WARD     | king         |
+| JONES    | jones        |
+| MARTIN   | king         |
+| BLAKE    | blake        |
+| CLARK    | king         |
+| SCOTT    | clark        |
+| KING     | king         |
+| FRED     | king         |
+| TURNER   | king         |
+| ADAMS    | king         |
+| Ruhan    | king         |
+| Neel     | king         |
+| JAMES    | king         |
+| FORD     | king         |
+| HOFFMAN  | king         |
+| GRASS    | king         |
+| MILLER   | king         |
+| AARUSH   | king         |
+| ALEX     | king         |
+| NATASHA  | king         |
+| SANGITA  | king         |
+| SUPRIYA  | king         |
++----------+--------------+
